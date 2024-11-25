@@ -1,13 +1,14 @@
 {
   "name": "bee-hash",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple SHA-256 image hash generator",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["image", "hash", "generator", "SHA-256"],
+  "author": "Abdullah Moin",
   "license": "ISC",
   "dependencies": {
     "crypto": "^1.0.1",
