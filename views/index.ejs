@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Hash Generator</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="navbar">
+        <h1>Bee Hash</h1>
+        <button id="disclaimer-btn" class="btn neumorphism">Disclaimer</button>
+    </header>
+    <div id="disclaimer-sidebar" class="hidden-sidebar">
+        <h2>Disclaimer</h2>
+        <p>Supported file types: PNG, JPG, JPEG.</p>
+        <p>Maximum file size: 50MB.</p>
+        <p>This tool generates SHA-256 hash codes for uploaded images.</p>
+        <button id="close-sidebar" class="btn neumorphism">Close</button>
+    </div>
+    <div class="container">
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <div class="input-box neumorphism">
+                <input type="file" name="image" accept="image/png, image/jpeg, image/jpg" required>
+            </div>
+            <button class="btn neumorphism">Generate Hash</button>
+        </form>
+
+        <% if (hash) { %>
+        <div class="output-box neumorphism">
+            <p>SHA-256 Hash:</p>
+            <input type="text" value="<%= hash %>" readonly>
+            <button class="copy-btn neumorphism" onclick="copyHash()">Copy</button>
+        </div>
+        <% } %>
+
+        <% if (error) { %>
+        <p class="error"><%= error %></p>
+        <% } %>
+
+        <form action="/" method="GET">
+            <button class="btn reset-btn neumorphism">Restart</button>
+        </form>
+    </div>
+    <footer>
+        <p>© 2024 All rights reserved Abdullah Moin x BeeWiib</p>
+    </footer>
+
+    <script>
+        const sidebar = document.getElementById("disclaimer-sidebar");
+        const disclaimerBtn = document.getElementById("disclaimer-btn");
+        const closeSidebar = document.getElementById("close-sidebar");
+
+        disclaimerBtn.addEventListener("click", () => {
+            sidebar.style.transform = "translateX(0)";
+        });
+
+        closeSidebar.addEventListener("click", () => {
+            sidebar.style.transform = "translateX(100%)";
+        });
+
+        function copyHash() {
+            const input = document.querySelector(".output-box input");
+            input.select();
+            document.execCommand("copy");
+            alert("Hash copied!");
+        }
+    </script>
+</body>
+</html>
